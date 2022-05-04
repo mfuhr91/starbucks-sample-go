@@ -19,7 +19,7 @@ func main() {
 		port = "4747"
 	}
 	log.Printf("listen and serving on port: %s", port)
-	address := fmt.Sprintf(":%s", "8080")
+	address := fmt.Sprintf(":%s", port)
 	err := router.Run(address)
 	if err != nil {
 		log.Fatalf("Cannot start the server: %v ", err.Error())
