@@ -2,7 +2,6 @@ package repositories
 
 import (
 	"fmt"
-	_ "github.com/go-sql-driver/mysql"
 	"github.com/google/uuid"
 	"log"
 	"starbucks-app/database"
@@ -31,7 +30,7 @@ func (c *customerRepository) GetAll() ([]models.Customer, error) {
 	defer db.Close()
 	rows, err := db.Query("SELECT * FROM customers")
 	if err != nil {
-		log.Printf("error when getting the customers from starbucks_db")
+		log.Printf("error when getting the customers from db, %s", err)
 		return []models.Customer{}, err
 	}
 	
@@ -42,7 +41,7 @@ func (c *customerRepository) GetAll() ([]models.Customer, error) {
 		err = rows.Scan(&customer.ID, &customer.Name, &customer.LastName,
 			&customer.Phone, &customer.Address, &customer.Fav)
 		if err != nil {
-			log.Printf("error when scanning the customers row from starbucks_db")
+			log.Printf("error when scanning the customers row from db")
 			return []models.Customer{}, err
 		}
 		
@@ -61,7 +60,7 @@ func (c *customerRepository) Save(customer models.Customer) (models.Customer, er
 	}
 	
 	defer db.Close()
-	insertStat, err := db.Prepare("INSERT INTO customers (id, name, lastname, phone, address, fav) VALUES (?, ?, ?, ?, ?, ?)")
+	insertStat, err := db.Prepare("INSERT INTO customers (id, name, lastname, phone, address, fav) VALUES ($1, $2, $3, $4, $5, $6)")
 	if err != nil {
 		log.Printf("error when preparing the query, %s", err.Error())
 		return models.Customer{}, err
@@ -71,7 +70,7 @@ func (c *customerRepository) Save(customer models.Customer) (models.Customer, er
 	
 	_, err = insertStat.Exec(customer.ID, customer.Name, customer.LastName, customer.Phone, customer.Address, customer.Fav)
 	if err != nil {
-		log.Printf("error when saving the customer to starbucks_db, %s", err.Error())
+		log.Printf("error when saving the customer to db, %s", err.Error())
 		return models.Customer{}, err
 	}
 	
@@ -85,9 +84,9 @@ func (c *customerRepository) GetById(id string) (models.Customer, error) {
 	}
 	
 	defer db.Close()
-	selectStat, err := db.Prepare("SELECT * FROM customers WHERE id=?")
+	selectStat, err := db.Prepare("SELECT * FROM customers WHERE id=$1")
 	if err != nil {
-		log.Printf("error when getting the customers from starbucks_db")
+		log.Printf("error when getting the customers from db")
 		return models.Customer{}, err
 	}
 	
@@ -96,7 +95,7 @@ func (c *customerRepository) GetById(id string) (models.Customer, error) {
 	err = selectStat.QueryRow(id).Scan(&customer.ID, &customer.Name, &customer.LastName,
 		&customer.Phone, &customer.Address, &customer.Fav)
 	if err != nil {
-		log.Printf("error when saving the customer to starbucks_db, %s", err.Error())
+		log.Printf("error when saving the customer to db, %s", err.Error())
 		return models.Customer{}, err
 	}
 	
@@ -110,7 +109,7 @@ func (c *customerRepository) Update(customer models.Customer) (models.Customer, 
 	}
 	
 	defer db.Close()
-	updateStat, err := db.Prepare("UPDATE customers SET name=?, lastname=?, phone=?, address=?, fav=? WHERE id=?")
+	updateStat, err := db.Prepare("UPDATE customers SET name=$1, lastname=$2, phone=$3, address=$4, fav=$5 WHERE id=$6")
 	if err != nil {
 		log.Printf("error when preparing the query, %s", err.Error())
 		return models.Customer{}, err
@@ -118,7 +117,7 @@ func (c *customerRepository) Update(customer models.Customer) (models.Customer, 
 	
 	_, err = updateStat.Exec(customer.Name, customer.LastName, customer.Phone, customer.Address, customer.Fav, customer.ID)
 	if err != nil {
-		log.Printf("error when updating the customer from starbucks_db, %s", err.Error())
+		log.Printf("error when updating the customer from db, %s", err.Error())
 		return models.Customer{}, err
 	}
 	

@@ -3,6 +3,7 @@ package database
 import (
 	"database/sql"
 	"fmt"
+	_ "github.com/lib/pq"
 	"log"
 	"os"
 )
@@ -17,11 +18,15 @@ func DatabaseConnect() (*sql.DB, error) {
 	if dbName == "" {
 		dbName = "starbucks_db"
 	}
-	dataSource := fmt.Sprintf("%s:%s@tcp:(%s:3306)/%s", user, password, host, dbName)
 	
-	db, err = sql.Open("mysql", dataSource)
+	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s",
+		host, 5432, user, password, dbName)
+	
+	log.Printf("connecting to: %s", psqlInfo)
+	
+	db, err = sql.Open("postgres", psqlInfo)
 	if err != nil {
-		log.Fatalf("error when trying to connect to starbucks_db, %s", err.Error())
+		log.Fatalf("error when trying to connect to %s, %s", dbName, err.Error())
 		return db, nil
 	}
 	
