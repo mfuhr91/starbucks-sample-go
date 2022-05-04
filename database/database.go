@@ -18,6 +18,9 @@ func DatabaseConnect() (*sql.DB, error) {
 	if dbName == "" {
 		dbName = "starbucks_db"
 	}
+	if host == "" {
+		host = "localhost"
+	}
 	
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s",
 		host, 5432, user, password, dbName)
