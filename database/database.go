@@ -17,7 +17,7 @@ func DatabaseConnect() (*sql.DB, error) {
 	if dbName == "" {
 		dbName = "starbucks_db"
 	}
-	dataSource := fmt.Sprintf("%s:%s@%s/%s", user, password, host, dbName)
+	dataSource := fmt.Sprintf("%s:%s@tcp:(%s:3306)/%s", user, password, host, dbName)
 	
 	db, err = sql.Open("mysql", dataSource)
 	if err != nil {
