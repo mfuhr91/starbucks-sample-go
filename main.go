@@ -3,7 +3,6 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"log"
-	"os"
 	"starbucks-app/routes"
 )
 
@@ -12,12 +11,12 @@ func main() {
 	
 	routes.InitRoutes(router)
 	
-	port := os.Getenv("PORT")
+	/*port := os.Getenv("PORT")
 	
 	if port == "" {
 		port = ":8080"
-	}
-	err := router.Run(port)
+	}*/
+	err := router.Run(":8080")
 	if err != nil {
 		log.Fatalf("Cannot start the server: %v ", err.Error())
 		return
