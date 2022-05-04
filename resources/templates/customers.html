@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    {{ template "head.html" }}
+    <body>
+
+        {{ template "navbar.html" }}
+
+        <div class="container">
+            <div class="row">
+                <div class="col col-8">
+                    <h1 class="m-3">{{ .Title }}</h1>
+                </div>
+                <div class="col col-4">
+                    <a class="m-3 btn btn-primary" href="/customers/new">Agregar</a>
+                </div>
+            </div>
+            <div class="row">
+
+                {{if .Customers}}
+                    {{ range .Customers }}
+                        <div class="card-customer card m-auto my-2">
+                            <div class="row">
+                                <div class="col-9">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            {{ .Name }} {{ .LastName }}
+                                        </h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">
+                                            Favorito: {{ .Fav }}
+                                        </h6>
+                                        <p class="card-text">
+                                            Teléfono: {{ .Phone }}
+                                        </p>
+                                        <p class="card-text">
+                                            Dirección: {{ .Address }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <a class="fullclick" href="/customers/edit?id={{ .ID }}"></a>
+                                <div class="col-2 m-auto">
+                                    <i class="fa-solid fa-angle-right fa-4x"></i>
+                                </div>
+                            </div>
+                        </div>
+                    {{ end }}
+                {{ else }}
+                <div class="card-customer card m-auto my-2">
+                    <div class="card-body">
+                        <p class="card-text">
+                            Ningún cliente encontrado!
+                        </p>
+                    </div>
+                </div>
+                {{ end }}
+
+                <!--<table class="table table-sm table-striped table-bordered m-auto">
+
+                    <thead>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Favorito</th>
+                    </thead>
+                    <tbody>
+                        {{if .Customers}}
+                            {{ range .Customers }}
+
+                                <tr>
+                                        <td>{{ .Name }}</td>
+                                        <td>{{ .LastName }}</td>
+                                        <td>{{ .Fav }}</td>
+                                </tr>
+                            {{ end }}
+                        {{ else }}
+                            <tr>
+                                <td class="m-auto" colspan="3">Ningún cliente encontrado!</td>
+                            </tr>
+                        {{ end }}
+                    </tbody>
+                </table>-->
+            </div>
+        </div>
+    </body>
+</html>

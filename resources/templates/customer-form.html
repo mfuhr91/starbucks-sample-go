@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+{{ template "head.html" }}
+<body>
+
+    {{ template "navbar.html" }}
+
+    <div class="container">
+        <div class="row">
+            <div class="col col-8">
+                <h1 class="m-3">{{ .Title }}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <form class="row" action="/customer/save" method="post">
+
+                <input value="{{ .Customer.ID }}" name="id" type="text" class="form-control d-none" >
+                <div class="input-group mb-3">
+                    <span class="input-group-text col-5" id="name">Nombre</span>
+                    <input value="{{ .Customer.Name }}" name="name" required type="text" class="form-control" aria-label="Sizing example input" aria-describedby="name">
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text col-5" id="lastName">Apellido</span>
+                    <input value="{{ .Customer.LastName }}" name="lastName" required type="text" class="form-control" aria-label="Sizing example input" aria-describedby="lastName">
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text col-5" id="phone">Teléfono</span>
+                    <input value="{{ .Customer.Phone }}" name="phone" required type="number" class="form-control" aria-label="Sizing example input" aria-describedby="phone">
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text col-5" id="address">Dirección</span>
+                    <input value="{{ .Customer.Address }}" name="address" required type="text" class="form-control" aria-label="Sizing example input" aria-describedby="address">
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text col-5" id="fav">Producto favorito</span>
+                    <input value="{{ .Customer.Fav }}" name="fav" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="fav">
+                </div>
+
+                <a class="btn btn-secondary m-auto col-5" href="/customers">Volver</a>
+                <button class="btn btn-primary m-auto col-5" type="submit">Guardar</button>
+            </form>
+        </div>
+
+
+    </div>
+</body>
+</html>
