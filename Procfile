@@ -1,1 +1,1 @@
-web: webapphr
+web: bin/go-getting-started
