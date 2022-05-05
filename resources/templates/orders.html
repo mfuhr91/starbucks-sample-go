@@ -6,12 +6,7 @@
 
         <div class="container">
             <div class="row">
-                <div class="col col-8">
-                    <h1 class="m-3">{{ .Title }}</h1>
-                </div>
-                <div class="col col-4">
-                    <a class="m-3 btn btn-primary" href="/customers?search=true">Agregar</a>
-                </div>
+                <h1 class="m-3">{{ .Title }}</h1>
             </div>
             <div class="row">
                 {{ if .Orders }}
@@ -50,6 +45,11 @@
                     </div>
                 </div>
                 {{ end }}
+            </div>
+            <div>
+                <a class="btn btn-primary add-button" href="/customers?search=true">
+                    <i class="fa fa-plus fa-2x add-button-icon"></i>
+                </a>
             </div>
         </div>
     </body>

@@ -37,12 +37,22 @@
                 </div>
 
                 {{ if .Order.ID }}
-                <a class="btn btn-secondary m-auto col-3" href="/orders">Volver</a>
-                <a class="btn btn-danger m-auto col-3" href="/orders/delete-confirm?from=orders&id={{ .Order.ID }}">Eliminar</a>
-                <button class="btn btn-primary m-auto col-3" type="submit">Guardar</button>
+                <a class="btn btn-secondary m-auto col-3 back-button" href="/orders">
+                    <i class="fa-solid fa-angle-left fa-2x back-button-icon"></i>
+                </a>
+                <a class="btn btn-danger m-auto col-3 delete-button" href="/orders/delete-confirm?from=orders&id={{ .Order.ID }}">
+                    <i class="fa-solid fa-trash fa-2x delete-button-icon"></i>
+                </a>
+                <button class="btn btn-primary m-auto col-3 save-button" type="submit">
+                    <i class="fa-solid fa-floppy-disk fa-2x"></i>
+                </button>
                 {{ else }}
-                <a class="btn btn-secondary m-auto col-5" href="/orders">Volver</a>
-                <button class="btn btn-primary m-auto col-5" type="submit">Guardar</button>
+                <a class="btn btn-secondary m-auto col-5 back-button" href="/orders">
+                    <i class="fa-solid fa-angle-left fa-2x back-button-icon"></i>
+                </a>
+                <button class="btn btn-primary m-auto col-5 save-button" type="submit">
+                    <i class="fa-solid fa-floppy-disk fa-2x"></i>
+                </button>
                 {{ end }}
 
             </form>
