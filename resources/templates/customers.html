@@ -5,7 +5,7 @@
 
         {{ template "navbar.html" }}
 
-        <div class="container">
+        <div class="container animate__animated animate__fadeIn">
             <div class="row">
                 <h1 class="m-3">{{ .Title }}</h1>
             </div>
@@ -60,7 +60,7 @@
             </div>
             {{ if not $.Searching }}
             <div>
-                <a class="m-3 btn btn-primary add-button" href="/customers/new">
+                <a class="btn btn-primary add-button" href="/customers/new">
                     <i class="fa fa-plus fa-2x add-button-icon"></i>
                 </a>
             </div>
