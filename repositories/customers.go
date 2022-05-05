@@ -15,6 +15,7 @@ type CustomerRepository interface {
 	GetById(id string) (models.Customer, error)
 	Save(models.Customer) (models.Customer, error)
 	Update(models.Customer) (models.Customer, error)
+	Delete(id string) error
 }
 
 func NewCustomerRepository() CustomerRepository {
@@ -122,4 +123,26 @@ func (c *customerRepository) Update(customer models.Customer) (models.Customer, 
 	}
 	
 	return customer, nil
+}
+
+func (c *customerRepository) Delete(id string) error {
+	db, err := database.DatabaseConnect()
+	if err != nil {
+		return err
+	}
+	
+	defer db.Close()
+	deleteStat, err := db.Prepare("DELETE FROM customers WHERE id=$1")
+	if err != nil {
+		log.Printf("error when preparing the query, %s", err.Error())
+		return err
+	}
+	
+	_, err = deleteStat.Exec(id)
+	if err != nil {
+		log.Printf("error when deleting the customer from db, %s", err.Error())
+		return err
+	}
+	
+	return nil
 }

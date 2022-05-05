@@ -3,11 +3,11 @@ body {
     max-width: 600px !important;
 }
 
-.card-customer {
+.cards {
     width: 90% !important;
 }
 
-.card-customer a {
+.cards a {
     display: block;
     z-index: 1;
     cursor: pointer;

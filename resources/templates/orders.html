@@ -10,12 +10,46 @@
                     <h1 class="m-3">{{ .Title }}</h1>
                 </div>
                 <div class="col col-4">
-                    <button class="m-3 btn btn-primary" href="pedido/crear">Agregar</button>
+                    <a class="m-3 btn btn-primary" href="/customers?search=true">Agregar</a>
                 </div>
             </div>
             <div class="row">
-            </div>
-            <div class="row">
+                {{ if .Orders }}
+                    {{ range .Orders }}
+                    <div class="cards card m-auto my-2">
+                        <div class="row">
+                            <div class="col-9">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        Pedido Nro: {{ .Number }}
+                                    </h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">
+                                        Cliente: {{ .Customer.Name }} {{ .Customer.LastName }}
+                                    </h6>
+                                    <p class="card-text">
+                                        Producto: {{ .Product }}
+                                    </p>
+                                    <p class="card-text">
+                                        Fecha: {{ .Time }}
+                                    </p>
+                                </div>
+                            </div>
+                            <a class="fullclick" href="/orders/edit?id={{ .ID }}"></a>
+                            <div class="col-2 m-auto">
+                                <i class="fa-solid fa-angle-right fa-4x"></i>
+                            </div>
+                        </div>
+                    </div>
+                    {{ end }}
+                {{ else }}
+                <div class="cards card m-auto my-2">
+                    <div class="card-body">
+                        <p class="card-text">
+                            Ningúna orden encontrada!
+                        </p>
+                    </div>
+                </div>
+                {{ end }}
             </div>
         </div>
     </body>

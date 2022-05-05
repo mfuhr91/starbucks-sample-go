@@ -2,25 +2,56 @@ package controllers
 
 import (
 	"github.com/gin-gonic/gin"
+	"log"
+	"starbucks-app/models"
+	"starbucks-app/services"
 	"starbucks-app/utils"
 )
 
-type pedidoController struct{}
+type orderController struct{}
 
-type PedidoController interface {
-	GetAll(c *gin.Context)
+type OrderController interface {
 	Save(c *gin.Context)
+	Delete(c *gin.Context)
 }
 
-func NewOrderController() PedidoController {
-	return &pedidoController{}
+var (
+	orderService services.OrderService
+)
+
+func NewOrderController(service services.OrderService) OrderController {
+	orderService = service
+	return &orderController{}
 }
 
-func (cont *pedidoController) GetAll(c *gin.Context) {
-
+func (cont *orderController) Save(c *gin.Context) {
+	var order models.Order
+	
+	err := c.ShouldBind(&order)
+	if err != nil {
+		log.Printf("error when binding form - %s", err)
+		return
+	}
+	
+	customerId := c.Request.FormValue("customerId")
+	order.Customer.ID = customerId
+	
+	_, err = orderService.Save(order)
+	if err != nil {
+		log.Printf("error when saving order - %s", err)
+		return
+	}
+	
+	utils.Redirect("/orders", c)
 }
 
-func (cont *pedidoController) Save(c *gin.Context) {
+func (cont *orderController) Delete(c *gin.Context) {
+	id := c.Query("id")
+	err := orderService.Delete(id)
+	if err != nil {
+		log.Printf("error when deleting order - %s", err)
+		return
+	}
 	
 	utils.Redirect("/orders", c)
 }

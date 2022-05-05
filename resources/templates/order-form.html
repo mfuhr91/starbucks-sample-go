@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+{{ template "head.html" }}
+<body>
+
+    {{ template "navbar.html" }}
+
+    <div class="container">
+        <div class="row">
+            <div class="col col-8">
+                <h1 class="m-3">{{ .Title }}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <form class="row" action="/orders/save" method="post">
+
+                <input value="{{ .Order.ID }}" name="id" type="text" class="form-control d-none" >
+                {{if .Order.ID }}
+                <div class="input-group mb-3">
+                    <span class="input-group-text col-5" id="number">Número Pedido</span>
+                    <input value="{{ .Order.Number }}" name="number" disabled type="number" class="form-control" aria-describedby="number">
+                </div>
+                {{ end }}
+                <div class="input-group mb-3">
+                    <span class="input-group-text col-5" id="customer">Cliente</span>
+                    <input value="{{ .Order.Customer.ID }}" name="customerId" type="text" class="form-control d-none" >
+                    <input value="{{ .Order.Customer.Name }} {{ .Order.Customer.LastName }}" disabled type="text" class="form-control" aria-describedby="customer">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text col-5" id="product">Producto</span>
+                    <input value="{{ .Order.Product }}" name="product" required type="text" class="form-control" aria-label="Sizing example input" aria-describedby="product">
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text col-5" id="time">Fecha</span>
+                    <input id="inputTime" value="{{ .Order.Time }}" name="time" required type="datetime-local" class="form-control" aria-describedby="time">
+                </div>
+
+                {{ if .Order.ID }}
+                <a class="btn btn-secondary m-auto col-3" href="/orders">Volver</a>
+                <a class="btn btn-danger m-auto col-3" href="/orders/delete-confirm?from=orders&id={{ .Order.ID }}">Eliminar</a>
+                <button class="btn btn-primary m-auto col-3" type="submit">Guardar</button>
+                {{ else }}
+                <a class="btn btn-secondary m-auto col-5" href="/orders">Volver</a>
+                <button class="btn btn-primary m-auto col-5" type="submit">Guardar</button>
+                {{ end }}
+
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>

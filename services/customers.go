@@ -12,6 +12,7 @@ type CustomerService interface {
 	GetAll() ([]models.Customer, error)
 	GetById(id string) (models.Customer, error)
 	Save(customer models.Customer) (models.Customer, error)
+	Delete(id string) error
 }
 
 var customerRepository repositories.CustomerRepository
@@ -50,4 +51,13 @@ func (c *customerService) GetById(id string) (models.Customer, error) {
 		return models.Customer{}, err
 	}
 	return customer, nil
+}
+
+func (c customerService) Delete(id string) error {
+	err := customerRepository.Delete(id)
+	if err != nil {
+		return err
+	}
+	
+	return nil
 }

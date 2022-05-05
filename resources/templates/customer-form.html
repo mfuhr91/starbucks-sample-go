@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="row">
-            <form class="row" action="/customer/save" method="post">
+            <form class="row" action="/customers/save" method="post">
 
                 <input value="{{ .Customer.ID }}" name="id" type="text" class="form-control d-none" >
                 <div class="input-group mb-3">
@@ -40,8 +40,14 @@
                     <input value="{{ .Customer.Fav }}" name="fav" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="fav">
                 </div>
 
+                {{ if .Customer.ID }}
+                <a class="btn btn-secondary m-auto col-3" href="/customers">Volver</a>
+                <a class="btn btn-danger m-auto col-3" href="/customers/delete-confirm?from=customers&id={{ .Customer.ID }}">Eliminar</a>
+                <button class="btn btn-primary m-auto col-3" type="submit">Guardar</button>
+                {{ else }}
                 <a class="btn btn-secondary m-auto col-5" href="/customers">Volver</a>
                 <button class="btn btn-primary m-auto col-5" type="submit">Guardar</button>
+                {{ end }}
             </form>
         </div>
 

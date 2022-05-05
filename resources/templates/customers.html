@@ -10,15 +10,16 @@
                 <div class="col col-8">
                     <h1 class="m-3">{{ .Title }}</h1>
                 </div>
+                {{ if not $.Searching }}
                 <div class="col col-4">
                     <a class="m-3 btn btn-primary" href="/customers/new">Agregar</a>
                 </div>
+                {{ end }}
             </div>
             <div class="row">
-
                 {{if .Customers}}
                     {{ range .Customers }}
-                        <div class="card-customer card m-auto my-2">
+                        <div class="cards card m-auto my-2">
                             <div class="row">
                                 <div class="col-9">
                                     <div class="card-body">
@@ -36,7 +37,11 @@
                                         </p>
                                     </div>
                                 </div>
+                                {{ if not $.Searching }}
                                 <a class="fullclick" href="/customers/edit?id={{ .ID }}"></a>
+                                {{ else }}
+                                <a class="fullclick" href="/orders/new?customerId={{ .ID }}"></a>
+                                {{ end }}
                                 <div class="col-2 m-auto">
                                     <i class="fa-solid fa-angle-right fa-4x"></i>
                                 </div>
@@ -44,7 +49,7 @@
                         </div>
                     {{ end }}
                 {{ else }}
-                <div class="card-customer card m-auto my-2">
+                <div class="cards card m-auto my-2">
                     <div class="card-body">
                         <p class="card-text">
                             Ningún cliente encontrado!
@@ -52,31 +57,11 @@
                     </div>
                 </div>
                 {{ end }}
-
-                <!--<table class="table table-sm table-striped table-bordered m-auto">
-
-                    <thead>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Favorito</th>
-                    </thead>
-                    <tbody>
-                        {{if .Customers}}
-                            {{ range .Customers }}
-
-                                <tr>
-                                        <td>{{ .Name }}</td>
-                                        <td>{{ .LastName }}</td>
-                                        <td>{{ .Fav }}</td>
-                                </tr>
-                            {{ end }}
-                        {{ else }}
-                            <tr>
-                                <td class="m-auto" colspan="3">Ningún cliente encontrado!</td>
-                            </tr>
-                        {{ end }}
-                    </tbody>
-                </table>-->
+            </div>
+            <div class="row">
+                {{ if $.Searching }}
+                <a class="btn btn-secondary m-auto col-6" href="/orders">Volver</a>
+                {{ end }}
             </div>
         </div>
     </body>

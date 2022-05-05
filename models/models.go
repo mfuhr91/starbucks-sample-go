@@ -11,7 +11,8 @@ type Customer struct {
 
 type Order struct {
 	ID       string   `form:"id,omitempty"`
-	Number   int      `form:"number"`
+	Number   int      `form:"number,omitempty"`
 	Customer Customer `form:"customer"`
 	Product  string   `form:"product"`
+	Time     string   `form:"time" time_format:"2006-01-02T15:04" time_utc:"true"`
 }
