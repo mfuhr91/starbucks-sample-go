@@ -40,7 +40,7 @@ func (c *customerRepository) GetAll() ([]models.Customer, error) {
 		var customer models.Customer
 		
 		err = rows.Scan(&customer.ID, &customer.Name, &customer.LastName,
-			&customer.Phone, &customer.Address, &customer.Fav)
+			&customer.Phone, &customer.Address, &customer.Fav, &customer.Disabled)
 		if err != nil {
 			log.Printf("error when scanning the customers row from db")
 			return []models.Customer{}, err
@@ -94,7 +94,7 @@ func (c *customerRepository) GetById(id string) (models.Customer, error) {
 	var customer models.Customer
 	
 	err = selectStat.QueryRow(id).Scan(&customer.ID, &customer.Name, &customer.LastName,
-		&customer.Phone, &customer.Address, &customer.Fav)
+		&customer.Phone, &customer.Address, &customer.Fav, &customer.Disabled)
 	if err != nil {
 		log.Printf("error when saving the customer to db, %s", err.Error())
 		return models.Customer{}, err
@@ -132,7 +132,7 @@ func (c *customerRepository) Delete(id string) error {
 	}
 	
 	defer db.Close()
-	deleteStat, err := db.Prepare("DELETE FROM customers WHERE id=$1")
+	deleteStat, err := db.Prepare("UPDATE customers SET disabled=true WHERE id=$1")
 	if err != nil {
 		log.Printf("error when preparing the query, %s", err.Error())
 		return err

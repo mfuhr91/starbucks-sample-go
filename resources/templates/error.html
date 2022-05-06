@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+{{ template "head.html" }}
+<body>
+{{ template "navbar.html" }}
+
+<div class="container animate__animated animate__fadeIn">
+    <div class="row my-4 mx-2">
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Algo salió mal!</h4>
+            <span> <strong>Error:</strong> {{ .Error }}</span>
+            <hr>
+            <strong>{{ .Msg }}</strong>
+        </div>
+    </div>
+    <div class="row">
+        <a class="btn btn-success reload-button m-auto" href="/orders">
+            <i class="fa-solid fa-rotate-right fa-2x reload-button-icon"></i>
+        </a>
+    </div>
+</div>
+</body>
+</html>

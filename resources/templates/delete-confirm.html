@@ -1,14 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
 {{ template "head.html" }}
 <body>
 {{ template "navbar.html" }}
@@ -21,17 +12,19 @@
     </div>
     <div class="row">
         <div class="cards card m-auto my-2">
-            <div class="card-body">
+            <div class="card-body m-auto">
                 <h5 class="card-title">
                     ¿Está seguro que desea eliminar?
                 </h5>
             </div>
-
-            <form class="row mb-3" action="/{{ .From }}/delete?id={{ .ID }}" method="post">
-                <a class="btn btn-secondary m-auto col-4" href="/{{ .From }}">Cancelar</a>
-                <button class="btn btn-danger m-auto col-4" type="submit">Eliminar</button>
+            <form class="row mb-4" action="/{{ .From }}/delete?id={{ .ID }}" method="post">
+                <a class="btn btn-secondary m-auto me-3 back-confirm-button" href="/{{ .From }}">
+                    <i class="fa-solid fa-angle-left fa-2x back-button-icon"></i>
+                </a>
+                <button class="btn btn-danger m-auto ms-3 delete-confirm-button" type="submit">
+                    <i class="fa-solid fa-trash fa-2x delete-button-icon"></i>
+                </button>
             </form>
-
         </div>
     </div>
 

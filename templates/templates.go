@@ -28,9 +28,9 @@ func Ping(c *gin.Context) {
 func CustomersRender(c *gin.Context) {
 	customers, err := customerService.GetAll()
 	if err != nil {
-		c.HTML(http.StatusOK, "customers.html", gin.H{
-			"Title":     "Clientes",
-			"Customers": []models.Customer{},
+		c.HTML(http.StatusOK, "error.html", gin.H{
+			"Error": err,
+			"Msg":   "Toca el botón para reintentar",
 		})
 		return
 	}
@@ -61,8 +61,9 @@ func CustomerRenderForm(c *gin.Context) {
 	}
 	customer, err := customerService.GetById(id)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
+		c.HTML(http.StatusOK, "error.html", gin.H{
 			"Error": err,
+			"Msg":   "Toca el botón para reintentar",
 		})
 		return
 	}
@@ -75,12 +76,13 @@ func CustomerRenderForm(c *gin.Context) {
 func OrdersRender(c *gin.Context) {
 	orders, err := orderService.GetAll()
 	if err != nil {
-		c.HTML(http.StatusOK, "orders.html", gin.H{
-			"Title":     "Pedidos",
-			"Customers": []models.Order{},
+		c.HTML(http.StatusOK, "error.html", gin.H{
+			"Error": err,
+			"Msg":   "Toca el botón para reintentar",
 		})
 		return
 	}
+	
 	c.HTML(http.StatusOK, "orders.html", gin.H{
 		"Title":  "Pedidos",
 		"Orders": orders,
@@ -89,15 +91,26 @@ func OrdersRender(c *gin.Context) {
 
 func OrderRenderForm(c *gin.Context) {
 	customerId := c.Query("customerId")
-	customer, _ := customerService.GetById(customerId)
 	
-	date := time.Now().String()[0:16]
-	date = strings.Replace(date, " ", "T", 1)
-	order := models.Order{
-		Customer: customer,
-		Time:     date,
-	}
 	if customerId != "" {
+		customer, err := customerService.GetById(customerId)
+		if err != nil {
+			c.HTML(http.StatusOK, "error.html", gin.H{
+				"Error": err,
+				"Msg":   "Toca el botón para reintentar",
+			})
+			return
+		}
+		
+		loc, _ := time.LoadLocation("America/Argentina/Buenos_Aires")
+		newDate := time.Now().In(loc)
+		date := newDate.String()[0:16]
+		date = strings.Replace(date, " ", "T", 1)
+		
+		order := models.Order{
+			Customer: customer,
+			Time:     date,
+		}
 		c.HTML(http.StatusOK, "order-form.html", gin.H{
 			"Title": "Nuevo Pedido",
 			"Order": order,
@@ -106,7 +119,14 @@ func OrderRenderForm(c *gin.Context) {
 	}
 	
 	id := c.Query("id")
-	order, _ = orderService.GetById(id)
+	order, err := orderService.GetById(id)
+	if err != nil {
+		c.HTML(http.StatusOK, "error.html", gin.H{
+			"Error": err,
+			"Msg":   "Toca el botón para reintentar",
+		})
+		return
+	}
 	
 	order.Time = order.Time[0:16]
 	c.HTML(http.StatusOK, "order-form.html", gin.H{

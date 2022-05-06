@@ -1,4 +1,4 @@
-body {
+body,html {
     margin: auto !important;
     max-width: 600px !important;
 }
@@ -21,7 +21,7 @@ body {
     bottom: 0;
 }
 
-.add-button, .save-button, .delete-button, .back-button {
+.add-button, .save-button, .delete-button, .back-button, .reload-button {
     border-radius: 100px !important;
     width: 60px !important;
     height: 60px !important;
@@ -32,15 +32,22 @@ body {
     z-index: 100;
 }
 
-.add-button-icon {
-    margin-top: 8px;
+.delete-confirm-button, .back-confirm-button {
+    border-radius: 100px !important;
+    width: 60px !important;
+    height: 60px !important;
+    box-shadow: 1px 1px 2px gray;
 }
 
-.back-button-icon {
-    margin-top: 8px;
+.delete-confirm-button .delete-button-icon {
+    margin-top: 2px;
 }
 
-.save-button-icon {
+.back-confirm-button .back-button-icon{
+    margin-top: 7px;
+}
+
+.add-button-icon, .save-button-icon, .delete-button-icon, .back-button-icon, .reload-button-icon {
     margin-top: 8px;
 }
 
@@ -50,10 +57,6 @@ body {
 
 .delete-button {
     bottom: 180px;
-}
-
-.delete-button-icon {
-    margin-top: 8px;
 }
 
 .navbar {

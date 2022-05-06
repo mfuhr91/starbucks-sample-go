@@ -37,7 +37,7 @@ func DatabaseConnect() (*sql.DB, error) {
 	db, err = sql.Open("postgres", psqlInfo)
 	if err != nil {
 		log.Fatalf("error when trying to connect to %s, %s", dbName, err.Error())
-		return db, nil
+		return db, err
 	}
 	
 	return db, nil

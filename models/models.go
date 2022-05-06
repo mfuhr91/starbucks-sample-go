@@ -7,6 +7,7 @@ type Customer struct {
 	Phone    int    `form:"phone"`
 	Address  string `form:"address"`
 	Fav      string `form:"fav"`
+	Disabled bool
 }
 
 type Order struct {
