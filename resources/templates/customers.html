@@ -55,19 +55,18 @@
                 </div>
                 {{ end }}
             </div>
-            <div class="row">
-                {{ if $.Searching }}
-                <a class="btn btn-secondary m-auto col-6 back-button" href="/orders">
-                    <i class="fa-solid fa-angle-left fa-2x back-button-icon"></i>
-                </a>
-                {{ end }}
-            </div>
-            {{ if not $.Searching }}
-            <div>
-                <a class="btn btn-primary add-button" href="/customers/new">
-                    <i class="fa fa-plus fa-2x add-button-icon"></i>
-                </a>
-            </div>
+            {{ if $.Searching }}
+                <div>
+                    <a class="btn btn-secondary m-auto col-6 back-button" href="/orders">
+                        <i class="fa-solid fa-angle-left fa-2x back-button-icon"></i>
+                    </a>
+                </div>
+            {{ else }}
+                <div>
+                    <a class="btn btn-primary add-button" href="/customers/new">
+                        <i class="fa fa-plus fa-2x add-button-icon"></i>
+                    </a>
+                </div>
             {{ end }}
         </div>
     </body>

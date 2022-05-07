@@ -1,4 +1,4 @@
-body,html {
+body {
     margin: auto !important;
     max-width: 600px !important;
 }
@@ -26,8 +26,8 @@ body,html {
     width: 60px !important;
     height: 60px !important;
     position: fixed;
+    margin-left: 508px !important;
     bottom: 40px;
-    right: 20px;
     box-shadow: 1px 1px 2px gray;
     z-index: 100;
 }
@@ -64,4 +64,10 @@ body,html {
     top: 0 !important;
     left: 0 !important;
     z-index: 100;
+}
+
+@media (max-width: 700px) {
+    .add-button, .save-button, .delete-button, .back-button, .reload-button {
+        right: 20px !important;
+    }
 }

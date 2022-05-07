@@ -39,25 +39,26 @@
                     <span class="input-group-text col-5" id="fav">Producto favorito</span>
                     <input value="{{ .Customer.Fav }}" name="fav" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="fav">
                 </div>
-
-                {{ if .Customer.ID }}
-                <a class="btn btn-secondary m-auto col-3 back-button" href="/customers">
-                    <i class="fa-solid fa-angle-left fa-2x back-button-icon"></i>
-                </a>
-                <a class="btn btn-danger m-auto col-3 delete-button" href="/customers/delete-confirm?from=customers&id={{ .Customer.ID }}">
-                    <i class="fa-solid fa-trash fa-2x delete-button-icon"></i>
-                </a>
-                <button class="btn btn-primary m-auto col-3 save-button" type="submit">
-                    <i class="fa-solid fa-floppy-disk fa-2x"></i>
-                </button>
-                {{ else }}
-                <a class="btn btn-secondary m-auto col-5 back-button" href="/customers">
-                    <i class="fa-solid fa-angle-left fa-2x back-button-icon"></i>
-                </a>
-                <button class="btn btn-primary m-auto col-5 save-button" type="submit">
-                    <i class="fa-solid fa-floppy-disk fa-2x"></i>
-                </button>
-                {{ end }}
+                <div>
+                    {{ if .Customer.ID }}
+                        <a class="btn btn-secondary m-auto col-3 back-button" href="/customers">
+                            <i class="fa-solid fa-angle-left fa-2x back-button-icon"></i>
+                        </a>
+                        <a class="btn btn-danger m-auto col-3 delete-button" href="/customers/delete-confirm?from=customers&id={{ .Customer.ID }}">
+                            <i class="fa-solid fa-trash fa-2x delete-button-icon"></i>
+                        </a>
+                        <button class="btn btn-primary m-auto col-3 save-button" type="submit">
+                            <i class="fa-solid fa-floppy-disk fa-2x"></i>
+                        </button>
+                    {{ else }}
+                        <a class="btn btn-secondary m-auto col-5 back-button" href="/customers">
+                            <i class="fa-solid fa-angle-left fa-2x back-button-icon"></i>
+                        </a>
+                        <button class="btn btn-primary m-auto col-5 save-button" type="submit">
+                            <i class="fa-solid fa-floppy-disk fa-2x"></i>
+                        </button>
+                    {{ end }}
+                </div>
             </form>
         </div>
 
