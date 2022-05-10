@@ -5,13 +5,13 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"os"
-	"starbucks-app/routes"
+	"starbucks-app/router"
 )
 
 func main() {
-	router := gin.Default()
+	r := gin.Default()
 	
-	routes.InitRoutes(router)
+	router.InitRoutes(r)
 	
 	port := os.Getenv("PORT")
 	
@@ -20,7 +20,7 @@ func main() {
 	}
 	log.Printf("listen and serving on port: %s", port)
 	address := fmt.Sprintf(":%s", port)
-	err := router.Run(address)
+	err := r.Run(address)
 	if err != nil {
 		log.Fatalf("Cannot start the server: %v ", err.Error())
 		return
