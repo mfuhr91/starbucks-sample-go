@@ -6,6 +6,8 @@ App de ejercicio para la materia Sistemas Colaborativos de la Universidad Siglo 
 
 ## App Screenshots
 
-<img src="doc-assets/pedidos.png" alt="Pedidos" title="Pedidos" width="300" />
-<img src="doc-assets/editar_pedido.png" alt="Pedidos" title="Pedidos" width="300" />
+<div>
+<img src="doc-assets/pedidos.png" alt="Pedidos" title="Pedidos" width="300" /> 
+<img src="doc-assets/editar_pedido.png" alt="Pedidos" title="Pedidos" width="300" /> 
 <img src="doc-assets/nuevo_cliente.png" alt="Pedidos" title="Pedidos" width="300" />
+</div>
