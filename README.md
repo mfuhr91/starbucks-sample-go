@@ -1,6 +1,8 @@
 # starbucks-sample-go
 
-App desarrollada en golang El mismo se eligió por su capacidad de desarrollo web utilizando para esto el framework Gin, que ofrece de forma embebida la posibilidad de renderizar páginas html y css, Golang también se caracteriza por su potencia, portabilidad, y gran velocidad de ejecución.
+App desarrollada en Golang utilizando el framework Gin gonic, que ofrece de forma embebida una librería para renderizar páginas html.
+
+App de ejercicio para la materia Sistemas Colaborativos de la Universidad Siglo 21
 
 ## App Screenshots
 
