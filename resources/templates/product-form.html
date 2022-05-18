@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+{{ template "head.html" }}
+<body>
+
+    {{ template "navbar.html" }}
+
+    <div class="container animate__animated animate__fadeIn">
+        <div class="row">
+            <div class="col col-8">
+                <h1 class="m-3">{{ .Title }}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <form class="row" action="/products/save" method="post">
+
+                <input value="{{ .Product.ID }}" name="id" type="text" class="form-control d-none" >
+
+                <div class="form-floating mb-3">
+                    <input value="{{ .Product.Name }}" type="text" class="form-control" id="name" name="name" placeholder="Producto" required>
+                    <label class="ms-3" for="name">Producto</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input value="{{ .Product.Quantity }}" type="number" class="form-control" id="quantity" name="quantity" placeholder="Cantidad" required>
+                    <label class="ms-3" for="quantity">Cantidad</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input value="{{ .Product.Price }}" type="number" class="form-control" id="price" name="price" placeholder="Precio" required>
+                    <label class="ms-3" for="price">Precio</label>
+                </div>
+
+                <div>
+                    {{ if .Product.ID }}
+                        <a class="btn btn-secondary m-auto col-3 back-button" href="/products">
+                            <i class="fa-solid fa-angle-left fa-2x back-button-icon"></i>
+                        </a>
+                        <a class="btn btn-danger m-auto col-3 delete-button" href="/products/delete-confirm?from=products&id={{ .Product.ID }}">
+                            <i class="fa-solid fa-trash fa-2x delete-button-icon"></i>
+                        </a>
+                        <button class="btn btn-primary m-auto col-3 save-button" type="submit">
+                            <i class="fa-solid fa-floppy-disk fa-2x"></i>
+                        </button>
+                    {{ else }}
+                        <a class="btn btn-secondary m-auto col-5 back-button" href="/products">
+                            <i class="fa-solid fa-angle-left fa-2x back-button-icon"></i>
+                        </a>
+                        <button class="btn btn-primary m-auto col-5 save-button" type="submit">
+                            <i class="fa-solid fa-floppy-disk fa-2x"></i>
+                        </button>
+                    {{ end }}
+                </div>
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>

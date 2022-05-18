@@ -12,28 +12,28 @@
                 </div>
             </div>
             <div class="row">
-                {{if .Customers}}
-                    {{ range .Customers }}
+                {{if .Products}}
+                    {{ range .Products }}
                         {{ if not .Disabled }}
                         <div class="cards card m-auto my-2">
                             <div class="row">
                                 <div class="col-9">
                                     <div class="card-body">
                                         <h3 class="card-title">
-                                            {{ .Name }} {{ .LastName }}
+                                            {{ .Name }}
                                         </h3>
-                                        <p class="card-text">
-                                            Teléfono: {{ .Phone }}
-                                        </p>
-                                        <p class="card-text">
-                                            Dirección: {{ .Address }}
-                                        </p>
+                                        <h6 class="card-subtitle mb-2 text-muted">
+                                            Cantidad: {{ .Quantity }}
+                                        </h6>
+                                        <h5 class="card-text">
+                                            Precio: ${{ .Price }}
+                                        </h5>
                                     </div>
                                 </div>
                                 {{ if not $.Searching }}
-                                    <a class="fullclick" href="/customers/edit?id={{ .ID }}"></a>
+                                    <a class="fullclick" href="/products/edit?id={{ .ID }}"></a>
                                 {{ else }}
-                                    <a class="fullclick" href="/orders/new?search=true&customerId={{ .ID }}"></a>
+                                    <a class="fullclick" href="/orders/new?productId={{ .ID }}&customerId={{ $.CustomerID }}"></a>
                                 {{ end }}
                                 <div class="col-2 m-auto">
                                     <i class="fa-solid fa-angle-right fa-4x"></i>
@@ -46,7 +46,7 @@
                 <div class="cards card m-auto my-2">
                     <div class="card-body">
                         <p class="card-text">
-                            Ningún cliente encontrado!
+                            Ningún producto encontrado!
                         </p>
                     </div>
                 </div>
@@ -54,13 +54,13 @@
             </div>
             {{ if $.Searching }}
                 <div>
-                    <a class="btn btn-secondary m-auto col-6 back-button" href="/orders">
+                    <a class="btn btn-secondary m-auto col-6 back-button" href="/orders/new?customerId={{ $.CustomerID }}">
                         <i class="fa-solid fa-angle-left fa-2x back-button-icon"></i>
                     </a>
                 </div>
             {{ else }}
                 <div>
-                    <a class="btn btn-primary add-button" href="/customers/new">
+                    <a class="btn btn-primary add-button" href="/products/new">
                         <i class="fa fa-plus fa-2x add-button-icon"></i>
                     </a>
                 </div>

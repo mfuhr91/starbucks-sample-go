@@ -12,9 +12,14 @@ var (
 	customerRepository = repositories.NewCustomerRepository()
 	customerService    = services.NewCustomerService(customerRepository)
 	customerController = controllers.NewCustomerController(customerService)
-	orderRepository    = repositories.NewOrderRepository()
-	orderService       = services.NewOrderService(orderRepository)
-	orderController    = controllers.NewOrderController(orderService)
+	
+	productRepository = repositories.NewProductRepository()
+	productService    = services.NewProductService(productRepository)
+	productController = controllers.NewProductController(productService)
+	
+	orderRepository = repositories.NewOrderRepository(productRepository)
+	orderService    = services.NewOrderService(orderRepository)
+	orderController = controllers.NewOrderController(orderService)
 )
 
 func InitRoutes(r *gin.Engine) {
@@ -40,5 +45,14 @@ func InitRoutes(r *gin.Engine) {
 	
 	r.POST("/orders/save", orderController.Save)
 	r.POST("/orders/delete", orderController.Delete)
+	
+	r.GET("/products", templates.ProductRender)
+	r.POST("/products", templates.ProductRender)
+	r.GET("/products/new", templates.ProductRenderForm)
+	r.GET("/products/edit", templates.ProductRenderForm)
+	r.GET("/products/delete-confirm", templates.DeleteConfirmRender)
+	
+	r.POST("/products/save", productController.Save)
+	r.POST("/products/delete", productController.Delete)
 	
 }

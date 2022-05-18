@@ -6,14 +6,30 @@ type Customer struct {
 	LastName string `form:"lastName"`
 	Phone    int    `form:"phone"`
 	Address  string `form:"address"`
-	Fav      string `form:"fav"`
 	Disabled bool
 }
 
 type Order struct {
-	ID       string   `form:"id,omitempty"`
-	Number   int      `form:"number,omitempty"`
-	Customer Customer `form:"customer"`
-	Product  string   `form:"product"`
-	Time     string   `form:"time" time_format:"2006-01-02T15:04" time_utc:"true"`
+	ID         string   `json:"id,omitempty"`
+	Number     int      `json:"number,omitempty"`
+	Customer   Customer `json:"customer"`
+	Items      []Item   `json:"items"`
+	FinalPrice float64  `json:"price,string"`
+	Time       string   `json:"time" time_format:"2006-01-02T15:04" time_utc:"true"`
+}
+
+type Product struct {
+	ID       string  `form:"id,omitempty"`
+	Quantity int     `form:"quantity,string"`
+	Name     string  `form:"name"`
+	Price    float64 `form:"price" json:"price,string"`
+	Disabled bool
+}
+
+type Item struct {
+	ID        string
+	OrderID   string
+	ProductID string `json:"productId"`
+	Quantity  int    `json:"quantity,string"`
+	Product
 }

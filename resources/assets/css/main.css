@@ -1,9 +1,10 @@
 body {
     margin: auto !important;
     max-width: 600px !important;
+    padding-bottom: 310px;
 }
 
-.cards {
+.cards, .order-card {
     width: 90% !important;
 }
 
@@ -11,6 +12,10 @@ body {
     display: block;
     z-index: 1;
     cursor: pointer;
+}
+
+.order-card {
+    padding: 0 !important;
 }
 
 .fullclick {
@@ -21,7 +26,7 @@ body {
     bottom: 0;
 }
 
-.add-button, .save-button, .delete-button, .back-button, .reload-button {
+.add-button, .save-button, .delete-button, .back-button, .reload-button, .search-product-button {
     border-radius: 100px !important;
     width: 60px !important;
     height: 60px !important;
@@ -47,12 +52,16 @@ body {
     margin-top: 7px;
 }
 
-.add-button-icon, .save-button-icon, .delete-button-icon, .back-button-icon, .reload-button-icon {
+.add-button-icon, .save-button-icon, .delete-button-icon, .back-button-icon, .reload-button-icon, .search-product-button-icon {
     margin-top: 8px;
 }
 
 .save-button {
     bottom: 110px;
+}
+
+.search-product-button {
+    bottom: 250px;
 }
 
 .delete-button {
@@ -67,7 +76,7 @@ body {
 }
 
 @media (max-width: 700px) {
-    .add-button, .save-button, .delete-button, .back-button, .reload-button {
+    .add-button, .save-button, .delete-button, .back-button, .reload-button, .search-product-button {
         right: 20px !important;
     }
 }

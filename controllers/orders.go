@@ -33,16 +33,11 @@ func (cont *orderController) Save(c *gin.Context) {
 		return
 	}
 	
-	customerId := c.Request.FormValue("customerId")
-	order.Customer.ID = customerId
-	
-	_, err = orderService.Save(order)
+	err = orderService.Save(order)
 	if err != nil {
 		log.Printf("error when saving order - %s", err)
 		return
 	}
-	
-	utils.Redirect("/orders", c)
 }
 
 func (cont *orderController) Delete(c *gin.Context) {

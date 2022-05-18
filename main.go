@@ -16,7 +16,7 @@ func main() {
 	port := os.Getenv("PORT")
 	
 	if port == "" {
-		port = "4747"
+		port = "8080"
 	}
 	log.Printf("listen and serving on port: %s", port)
 	address := fmt.Sprintf(":%s", port)

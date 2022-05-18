@@ -15,30 +15,26 @@
             <form class="row" action="/customers/save" method="post">
 
                 <input value="{{ .Customer.ID }}" name="id" type="text" class="form-control d-none" >
-                <div class="input-group mb-3">
-                    <span class="input-group-text col-5" id="name">Nombre</span>
-                    <input value="{{ .Customer.Name }}" name="name" required type="text" class="form-control" aria-label="Sizing example input" aria-describedby="name">
+                <div class="form-floating mb-3">
+                    <input value="{{ .Customer.Name }}" type="text" class="form-control" id="name" name="name" placeholder="Nombre" required>
+                    <label class="ms-3" for="name">Nombre</label>
                 </div>
 
-                <div class="input-group mb-3">
-                    <span class="input-group-text col-5" id="lastName">Apellido</span>
-                    <input value="{{ .Customer.LastName }}" name="lastName" required type="text" class="form-control" aria-label="Sizing example input" aria-describedby="lastName">
+                <div class="form-floating mb-3">
+                    <input value="{{ .Customer.LastName }}" type="text" class="form-control" id="lastName" name="lastName" placeholder="Apellido" required>
+                    <label class="ms-3" for="name">Apellido</label>
                 </div>
 
-                <div class="input-group mb-3">
-                    <span class="input-group-text col-5" id="phone">Teléfono</span>
-                    <input value="{{ .Customer.Phone }}" name="phone" required type="number" class="form-control" aria-label="Sizing example input" aria-describedby="phone">
+                <div class="form-floating mb-3">
+                    <input value="{{ .Customer.Phone }}" type="number" class="form-control" id="phone" name="phone" placeholder="Teléfono" required>
+                    <label class="ms-3" for="name">Teléfono</label>
                 </div>
 
-                <div class="input-group mb-3">
-                    <span class="input-group-text col-5" id="address">Dirección</span>
-                    <input value="{{ .Customer.Address }}" name="address" required type="text" class="form-control" aria-label="Sizing example input" aria-describedby="address">
+                <div class="form-floating mb-3">
+                    <input value="{{ .Customer.Address }}" type="text" class="form-control" id="address" name="address" placeholder="Dirección" required >
+                    <label class="ms-3" for="name">Dirección</label>
                 </div>
 
-                <div class="input-group mb-3">
-                    <span class="input-group-text col-5" id="fav">Producto favorito</span>
-                    <input value="{{ .Customer.Fav }}" name="fav" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="fav">
-                </div>
                 <div>
                     {{ if .Customer.ID }}
                         <a class="btn btn-secondary m-auto col-3 back-button" href="/customers">

@@ -12,7 +12,7 @@ type orderService struct{}
 type OrderService interface {
 	GetAll() ([]models.Order, error)
 	GetById(id string) (models.Order, error)
-	Save(order models.Order) (models.Order, error)
+	Save(order models.Order) error
 	Delete(id string) error
 }
 
@@ -48,19 +48,19 @@ func (c orderService) GetAll() ([]models.Order, error) {
 	return orders, nil
 }
 
-func (c orderService) Save(order models.Order) (models.Order, error) {
+func (c orderService) Save(order models.Order) error {
 	var err error
 	if order.ID == "" {
-		order, err = orderRepository.Save(order)
+		err = orderRepository.Save(order)
 	} else {
 		order, err = orderRepository.Update(order)
 	}
 	
 	if err != nil {
-		return models.Order{}, err
+		return err
 	}
 	
-	return order, nil
+	return nil
 }
 
 func (c *orderService) GetById(id string) (models.Order, error) {
