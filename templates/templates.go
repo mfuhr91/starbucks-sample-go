@@ -25,11 +25,20 @@ var (
 	orderRepository = repositories.NewOrderRepository(productRepository)
 	orderService    = services.NewOrderService(orderRepository)
 	orderController = controllers.NewOrderController(orderService)
-	order           models.Order
+	
+	order models.Order
 )
 
 func Ping(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"ping": "pong"})
+}
+
+func NoRouteHandler(c *gin.Context) {
+	c.HTML(http.StatusOK, "error.html", gin.H{
+		"Error": "Esta página no existe!",
+		"Msg":   "Toca el botón para reintentar",
+	})
+	return
 }
 
 func CustomersRender(c *gin.Context) {
@@ -183,8 +192,6 @@ func ProductRender(c *gin.Context) {
 		}
 	}
 	order.FinalPrice = finalPrice
-	
-	log.Printf("items receive: %-v", items)
 	
 	searching, _ := strconv.ParseBool(c.Query("search"))
 	if searching {

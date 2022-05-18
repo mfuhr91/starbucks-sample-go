@@ -23,7 +23,7 @@ var (
 )
 
 func InitRoutes(r *gin.Engine) {
-	r.NoRoute(templates.OrdersRender)
+	r.NoRoute(templates.NoRouteHandler)
 	r.GET("/ping", templates.Ping)
 	
 	r.Static("assets", "resources/assets")
