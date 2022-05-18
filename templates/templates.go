@@ -184,6 +184,8 @@ func ProductRender(c *gin.Context) {
 	}
 	order.FinalPrice = finalPrice
 	
+	log.Printf("items receive: %-v", items)
+	
 	searching, _ := strconv.ParseBool(c.Query("search"))
 	if searching {
 		products, err := productService.GetAll(false)

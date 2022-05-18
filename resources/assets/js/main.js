@@ -1,7 +1,7 @@
 
 async function searchProduct(customerId) {
     const itemList = getItemList()
-
+    console.log(itemList)
     const options = {
         method: 'POST',
         headers: {
