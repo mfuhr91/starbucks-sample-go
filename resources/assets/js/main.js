@@ -55,9 +55,11 @@ function checkQuantityUpdatePrice(productStock, index) {
 
     if (Number(item.quantity) > Number(productStock) ) {
         span.classList.remove("d-none");
+        span.classList.add("animate__headShake");
         saveButton.setAttribute("disabled","")
     } else {
         span.classList.add("d-none");
+        span.classList.remove("animate__headShake");
         saveButton.removeAttribute("disabled")
     }
 
