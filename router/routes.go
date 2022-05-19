@@ -30,6 +30,8 @@ func InitRoutes(r *gin.Engine) {
 	
 	r.LoadHTMLGlob("resources/templates/*")
 	
+	r.GET("/", templates.OrdersRender)
+	
 	r.GET("/customers", templates.CustomersRender)
 	r.GET("/customers/new", templates.CustomerRenderForm)
 	r.GET("/customers/edit", templates.CustomerRenderForm)
