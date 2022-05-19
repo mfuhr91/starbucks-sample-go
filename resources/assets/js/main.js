@@ -45,9 +45,23 @@ async function saveOrder(customerId) {
     location.href = "/orders"
 }
 
-function updateFinalPrice() {
-    let finalPrice = 0
+function checkQuantityUpdatePrice(productStock, index) {
     const list = getItemList()
+
+    let item = list[index]
+
+    let saveButton = document.querySelector(".save-button")
+    let span = document.querySelector("#error-"+index)
+
+    if (Number(item.quantity) > Number(productStock) ) {
+        span.classList.remove("d-none");
+        saveButton.setAttribute("disabled","")
+    } else {
+        span.classList.add("d-none");
+        saveButton.removeAttribute("disabled")
+    }
+
+    let finalPrice = 0
 
     list.forEach( (item) => {
         finalPrice += item.price * item.quantity
@@ -64,9 +78,9 @@ function getItemList() {
     itemsDivs.forEach( (div) => {
 
         const quantityInput = div.querySelector("input")
-        let quantityValue = quantityInput.value
+        const quantityValue = quantityInput.value
         const priceValue = div.querySelector(".d-none").textContent
-        let productIdValue = quantityInput.getAttribute("id")
+        const productIdValue = quantityInput.getAttribute("id")
 
         const item = {
             productId: productIdValue,

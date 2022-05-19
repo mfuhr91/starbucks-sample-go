@@ -57,7 +57,7 @@
                             <div class="item-info input-group row ms-2 mb-3">
                                 <span class="input-group-text col-4" >Cantidad</span>
                                 <span class="d-none">{{ .Product.Price }}</span>
-                                <input onkeyup="updateFinalPrice()" value="{{ .Quantity }}"
+                                <input onkeyup="checkQuantityUpdatePrice('{{ .Product.Quantity }}','{{ $i }}')" value="{{ .Quantity }}"
                                        id="{{ .Product.ID }}"
                                        name="quantity"
                                        required
@@ -66,6 +66,9 @@
                                        class="form-control quantity-input"
                                        aria-label="Sizing example input"
                                        aria-describedby="quantity">
+                            </div>
+                            <div id="error-{{ $i }}" class="row d-none">
+                                <span class="badge bg-danger">La cantidad no puede ser mayor al stock</span>
                             </div>
                         </div>
                     {{ end }}
