@@ -4,6 +4,7 @@ type Customer struct {
 	ID       string `form:"id,omitempty"`
 	Name     string `form:"name"`
 	LastName string `form:"lastName"`
+	Doc      int    `form:"doc"`
 	Phone    int    `form:"phone"`
 	Address  string `form:"address"`
 	Disabled bool

@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="row">
-            <form class="row" action="/customers/save" method="post">
+            <form id="form" class="col-8 m-auto mt-4" action="/customers/save" method="post">
 
                 <input value="{{ .Customer.ID }}" name="id" type="text" class="form-control d-none" >
                 <div class="form-floating mb-3">
@@ -21,17 +21,22 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input value="{{ .Customer.LastName }}" type="text" class="form-control" id="lastName" name="lastName" placeholder="Apellido" required>
+                    <input onfocusout="validateForms()" value="{{ .Customer.LastName }}" type="text" class="form-control" id="lastName" name="lastName" placeholder="Apellido" required>
                     <label class="ms-3" for="name">Apellido</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input value="{{ .Customer.Phone }}" type="number" class="form-control" id="phone" name="phone" placeholder="Teléfono" required>
+                    <input onfocusout="validateForms()" onchange="validateDoc()" value="{{ .Customer.Doc }}" type="number" min="111111" class="form-control" id="doc" name="doc" placeholder="Documento" required>
+                    <label class="ms-3" for="name">Documento</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input onfocusout="validateForms()" onchange="validatePhone()" value="{{ .Customer.Phone }}" type="number" min="100000" class="form-control" id="phone" name="phone" placeholder="Teléfono" required>
                     <label class="ms-3" for="name">Teléfono</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input value="{{ .Customer.Address }}" type="text" class="form-control" id="address" name="address" placeholder="Dirección" required >
+                    <input onfocusout="validateForms()" value="{{ .Customer.Address }}" type="text" class="form-control" id="address" name="address" placeholder="Dirección" required >
                     <label class="ms-3" for="name">Dirección</label>
                 </div>
 
@@ -43,14 +48,14 @@
                         <a class="btn btn-danger m-auto col-3 delete-button" href="/customers/delete-confirm?from=customers&id={{ .Customer.ID }}">
                             <i class="fa-solid fa-trash fa-2x delete-button-icon"></i>
                         </a>
-                        <button class="btn btn-primary m-auto col-3 save-button" type="submit">
+                        <button id="saveBtn" class="btn btn-primary m-auto col-3 save-button" type="submit" disabled>
                             <i class="fa-solid fa-floppy-disk fa-2x"></i>
                         </button>
                     {{ else }}
                         <a class="btn btn-secondary m-auto col-5 back-button" href="/customers">
                             <i class="fa-solid fa-angle-left fa-2x back-button-icon"></i>
                         </a>
-                        <button class="btn btn-primary m-auto col-5 save-button" type="submit">
+                        <button id="saveBtn" class="btn btn-primary m-auto col-5 save-button" type="submit" disabled>
                             <i class="fa-solid fa-floppy-disk fa-2x"></i>
                         </button>
                     {{ end }}

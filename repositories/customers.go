@@ -40,7 +40,7 @@ func (c *customerRepository) GetAll() ([]models.Customer, error) {
 		var customer models.Customer
 		
 		err = rows.Scan(&customer.ID, &customer.Name, &customer.LastName,
-			&customer.Phone, &customer.Address, &customer.Disabled)
+			&customer.Phone, &customer.Address, &customer.Disabled, &customer.Doc)
 		if err != nil {
 			log.Printf("error when scanning the customers row from db")
 			return []models.Customer{}, err
@@ -61,7 +61,7 @@ func (c *customerRepository) Save(customer models.Customer) (models.Customer, er
 	}
 	
 	defer db.Close()
-	insertStat, err := db.Prepare("INSERT INTO customers (id, name, lastname, phone, address) VALUES ($1, $2, $3, $4, $5)")
+	insertStat, err := db.Prepare("INSERT INTO customers (id, name, lastname, phone, address, doc) VALUES ($1, $2, $3, $4, $5, %6)")
 	if err != nil {
 		log.Printf("error when preparing the query, %s", err.Error())
 		return models.Customer{}, err
@@ -69,7 +69,7 @@ func (c *customerRepository) Save(customer models.Customer) (models.Customer, er
 	
 	customer.ID = uuid.New().String()
 	
-	_, err = insertStat.Exec(customer.ID, customer.Name, customer.LastName, customer.Phone, customer.Address)
+	_, err = insertStat.Exec(customer.ID, customer.Name, customer.LastName, customer.Phone, customer.Address, customer.Doc)
 	if err != nil {
 		log.Printf("error when saving the customer into db, %s", err.Error())
 		return models.Customer{}, err
@@ -94,7 +94,7 @@ func (c *customerRepository) GetById(id string) (models.Customer, error) {
 	var customer models.Customer
 	
 	err = selectStat.QueryRow(id).Scan(&customer.ID, &customer.Name, &customer.LastName,
-		&customer.Phone, &customer.Address, &customer.Disabled)
+		&customer.Phone, &customer.Address, &customer.Disabled, &customer.Doc)
 	if err != nil {
 		log.Printf("error when saving the customer into db, %s", err.Error())
 		return models.Customer{}, err
@@ -110,13 +110,13 @@ func (c *customerRepository) Update(customer models.Customer) (models.Customer, 
 	}
 	
 	defer db.Close()
-	updateStat, err := db.Prepare("UPDATE customers SET name=$1, lastname=$2, phone=$3, address=$4 WHERE id=$5")
+	updateStat, err := db.Prepare("UPDATE customers SET name=$1, lastname=$2, doc=$3, phone=$4, address=$5 WHERE id=$6")
 	if err != nil {
 		log.Printf("error when preparing the query, %s", err.Error())
 		return models.Customer{}, err
 	}
 	
-	_, err = updateStat.Exec(customer.Name, customer.LastName, customer.Phone, customer.Address, customer.ID)
+	_, err = updateStat.Exec(customer.Name, customer.LastName, customer.Doc, customer.Phone, customer.Address, customer.ID)
 	if err != nil {
 		log.Printf("error when updating the customer from db, %s", err.Error())
 		return models.Customer{}, err
