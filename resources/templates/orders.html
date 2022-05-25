@@ -18,11 +18,19 @@
                             <div class="col-9">
                                 <div class="card-body">
                                     <h3 class="card-title">
+                                        <span class="badge bg-dark fs-4" >
                                         Pedido Nro: {{ .Number }}
+                                        </span>
                                     </h3>
+                                    <hr>
                                     <h6 class="card-subtitle mb-2 text-muted">
-                                        Cliente: {{ .Customer.Name }} {{ .Customer.LastName }}
+                                        <span class="fs-4">
+                                            {{ .Customer.Name }} {{ .Customer.LastName }}
+                                        </span>
+                                        <br>
+                                        Dirección: {{ .Customer.Address }}
                                     </h6>
+                                    <hr>
 
                                     <h5>
                                         Productos:
@@ -42,7 +50,7 @@
                                 <div class="ms-3 mb-3">
                                     <h5 >Precio total:
                                         <span class="badge bg-success fs-5" >
-                                            $<span id="finalPrice" name="finalPrice">{{ .FinalPrice }}</span>
+                                            $<span name="finalPrice">{{ .FinalPrice }}</span>
                                         </span>
                                     </h5>
                                 </div>
