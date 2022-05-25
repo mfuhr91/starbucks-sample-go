@@ -58,6 +58,7 @@ const checkQuantityUpdatePrice = () =>{
     let saveOrderBtn = document.querySelector("#saveOrderBtn")
 
     let finalPrice = 0
+    let errors = false
     if (finalPriceElem != null){
         finalPriceElem.textContent = finalPrice.toString()
     }
@@ -75,12 +76,15 @@ const checkQuantityUpdatePrice = () =>{
             span.classList.add("animate__headShake");
             finalPriceElem.textContent = "0";
             saveButtonDisabled = true
-            break
+            errors = true
         } else {
             if (span != null) {
                 span.classList.add("d-none");
                 span.classList.remove("animate__headShake");
             }
+        }
+
+        if (!errors){
             saveButtonDisabled = false
         }
     }
