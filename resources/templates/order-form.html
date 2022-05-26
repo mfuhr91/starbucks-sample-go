@@ -4,7 +4,7 @@
 <body>
 
     {{ template "navbar.html" }}
-
+    {{ .PEPE }}
     <div class="container animate__animated animate__fadeIn">
         <div class="row">
             <div class="col col-8">
@@ -51,8 +51,9 @@
                             <div class="card mb-3">
                                 <div class="row">
                                     <div class="card-body">
-                                        <!--<button onclick="eliminarItem('{{ $i }}')" type="button" class="btn-close float-end" aria-label="Close">--></button>
-                                        <button onclick="eliminarItem(this)" type="button" class="btn-close float-end" aria-label="Close"></button>
+                                        {{ if not $.Order.ID }}
+                                            <button onclick="eliminarItem(this)" type="button" class="btn-close float-end" aria-label="Close"></button>
+                                        {{ end }}
                                         <h4 class="card-title ms-2">
                                             Producto: {{ .Product.Name }}
                                         </h4>
@@ -64,24 +65,47 @@
                                         </h5>
                                     </div>
                                 </div>
-
-                                <div class="item-info input-group row ms-2 mb-3">
-                                    <span class="input-group-text col-4" >Cantidad</span>
-                                    <span class="d-none">{{ .Product.Price }}</span>
-                                    <input onkeyup="checkQuantityUpdatePrice()" value="{{ .Quantity }}"
-                                           id="{{ .Product.ID }}"
-                                           name="quantity"
-                                           min="1"
-                                           required
-                                           type="number"
-                                           style="max-width: 30%"
-                                           class="form-control quantity-input"
-                                           aria-label="Sizing example input"
-                                           aria-describedby="quantity">
-                                </div>
-                                <div id="error-{{ $i }}" class="row d-none m-auto w-100 animate__animated">
-                                    <span class="badge bg-danger">La cantidad no puede ser mayor al stock</span>
-                                </div>
+                                {{ if $.Order.ID }}
+                                    <div class="item-info input-group row ms-2 mb-3">
+                                        <span class="input-group-text col-4" >Cantidad</span>
+                                        <span class="d-none">{{ .Product.Price }}</span>
+                                        <input value="{{ .Quantity }}"
+                                               name="quantity"
+                                               min="1"
+                                               disabled
+                                               type="number"
+                                               style="max-width: 30%"
+                                               class="form-control quantity-input"
+                                               aria-label="Sizing example input"
+                                               aria-describedby="quantity">
+                                    </div>
+                                {{ else }}
+                                    <div class="item-info input-group row ms-2 mb-3">
+                                        <span class="input-group-text col-4" >Cantidad</span>
+                                        <span class="d-none">{{ .Product.Price }}</span>
+                                        <input onkeyup="checkQuantityUpdatePrice()" value="{{ .Quantity }}"
+                                               id="{{ .Product.ID }}"
+                                               name="quantity"
+                                               min="1"
+                                               required
+                                               type="number"
+                                               style="max-width: 30%"
+                                               class="form-control quantity-input"
+                                               aria-label="Sizing example input"
+                                               aria-describedby="quantity">
+                                    </div>
+                                {{ end }}
+                                {{ if not $.Order.ID }}
+                                    <div id="error-{{ $i }}" class="row d-none m-auto w-100 animate__animated">
+                                        <span class="badge m-auto bg-danger">
+                                            La cantidad no puede ser menor a 1
+                                            <br>
+                                            ni mayor al stock.
+                                            <hr>
+                                            NO PODRAS GUARDAR TU PEDIDO
+                                        </span>
+                                    </div>
+                                {{ end }}
                             </div>
                         {{ end }}
                     {{ end }}
@@ -89,18 +113,18 @@
                 <div>
 
                     {{ if .Order.ID }}
-                        <a class="btn btn-success m-auto search-product-button" onclick="searchProduct('{{ .Order.Customer.ID }}')" >
+                       <!-- <a class="btn btn-success m-auto search-product-button" onclick="searchProduct('{{ .Order.Customer.ID }}')" >
                             <i class="fa-solid fa-plus fa-2x search-product-button-icon "></i>
-                        </a>
+                        </a>-->
                         <a class="btn btn-secondary col-3 back-button" href="/orders">
                             <i class="fa-solid fa-angle-left fa-2x back-button-icon"></i>
                         </a>
-                        <a class="btn btn-danger m-auto col-3 delete-button" href="/orders/delete-confirm?from=orders&id={{ .Order.ID }}">
+                        <a class="btn btn-danger col-3 delete-order-button" href="/orders/delete-confirm?from=orders&id={{ .Order.ID }}">
                             <i class="fa-solid fa-trash fa-2x delete-button-icon"></i>
                         </a>
-                        <button id="saveOrderBtn" class="btn btn-primary m-auto col-3 save-button" onclick="saveOrder('{{ .Order.Customer.ID }}')" type="button">
+                        <!--<button id="saveOrderBtn" class="btn btn-primary m-auto col-3 save-button" onclick="saveOrder('{{ .Order.Customer.ID }}')" type="button">
                             <i class="fa-solid fa-floppy-disk fa-2x"></i>
-                        </button>
+                        </button>-->
                     {{ else }}
                         <a class="btn btn-success m-auto search-product-button" style="bottom: 180px !important;" onclick="searchProduct('{{ .Order.Customer.ID }}')" >
                             <i class="fa-solid fa-plus fa-2x search-product-button-icon "></i>

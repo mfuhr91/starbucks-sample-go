@@ -141,7 +141,6 @@ func OrderRenderForm(c *gin.Context) {
 		c.HTML(http.StatusOK, "order-form.html", gin.H{
 			"Title": "Nuevo Pedido",
 			"Order": order,
-			/*"Item":  item,*/
 		})
 		return
 	}
@@ -165,7 +164,7 @@ func OrderRenderForm(c *gin.Context) {
 	
 	order.Time = order.Time[0:16]
 	c.HTML(http.StatusOK, "order-form.html", gin.H{
-		"Title": "Editar Pedido",
+		"Title": "Ver Pedido",
 		"Order": order,
 	})
 }

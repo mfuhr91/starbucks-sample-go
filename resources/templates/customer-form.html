@@ -16,28 +16,41 @@
 
                 <input value="{{ .Customer.ID }}" name="id" type="text" class="form-control d-none" >
                 <div class="form-floating mb-3">
-                    <input value="{{ .Customer.Name }}" type="text" class="form-control" id="name" name="name" placeholder="Nombre" required>
+                    <input onblur="validateForms()" value="{{ .Customer.Name }}" type="text" class="form-control" id="name" name="name" placeholder="Nombre" required>
                     <label class="ms-3" for="name">Nombre</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input onfocusout="validateForms()" value="{{ .Customer.LastName }}" type="text" class="form-control" id="lastName" name="lastName" placeholder="Apellido" required>
+                    <input onblur="validateForms()" value="{{ .Customer.LastName }}" type="text" class="form-control" id="lastName" name="lastName" placeholder="Apellido" required>
                     <label class="ms-3" for="name">Apellido</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input onfocusout="validateForms()" onchange="validateDoc()" value="{{ .Customer.Doc }}" type="number" min="111111" class="form-control" id="doc" name="doc" placeholder="Documento" required>
+                    <input onblur="validateForms()" onchange="validateDoc()" value="{{ .Customer.Doc }}" type="number" min="111111" class="form-control" id="doc" name="doc" placeholder="Documento" required>
                     <label class="ms-3" for="name">Documento</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input onfocusout="validateForms()" onchange="validatePhone()" value="{{ .Customer.Phone }}" type="number" min="100000" class="form-control" id="phone" name="phone" placeholder="Teléfono" required>
+                    <input onblur="validateForms()" onchange="validatePhone()" value="{{ .Customer.Phone }}" type="number" min="100000" class="form-control" id="phone" name="phone" placeholder="Teléfono" required>
                     <label class="ms-3" for="name">Teléfono</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input onfocusout="validateForms()" value="{{ .Customer.Address }}" type="text" class="form-control" id="address" name="address" placeholder="Dirección" required >
+                    <input onblur="validateForms()" value="{{ .Customer.Address }}" type="text" class="form-control" id="address" name="address" placeholder="Dirección" required >
                     <label class="ms-3" for="name">Dirección</label>
+                </div>
+                <div id="error" class="row d-none m-auto w-100 animate__animated">
+                                    <span class="badge m-auto bg-danger">
+                                        Todos los campos
+                                        <br>
+                                        deben estar completos
+                                        <hr>
+                                         El nombre y apellido
+                                        <br>
+                                        no pueden tener números
+                                        <hr>
+                                        NO PODRAS GUARDAR EL CLIENTE
+                                    </span>
                 </div>
 
                 <div>

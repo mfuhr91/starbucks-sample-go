@@ -1,0 +1,15 @@
+{
+  "short_name": "Starbucks APP",
+  "name": "Starbucks APP",
+  "icons": [
+    {
+      "src": "assets/starbucks-logo.png",
+      "type": "image/png",
+      "sizes": "500x500"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#1b202b",
+  "background_color": "#1b202b"
+}

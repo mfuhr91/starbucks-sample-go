@@ -1,6 +1,6 @@
 window.onload = () => {
     checkQuantityUpdatePrice()
-    validateForms()
+    /*validateForms()*/
 }
 
 const searchProduct = async (customerId) => {
@@ -50,7 +50,7 @@ const saveOrder = async (customerId) => {
 }
 
 
-const checkQuantityUpdatePrice = () =>{
+const checkQuantityUpdatePrice = () => {
     const list = getItemList()
     const finalPriceElem = document.querySelector("#finalPrice")
     let saveButtonDisabled = true;
@@ -59,7 +59,7 @@ const checkQuantityUpdatePrice = () =>{
 
     let finalPrice = 0
     let errors = false
-    if (finalPriceElem != null){
+    if (finalPriceElem != null) {
         finalPriceElem.textContent = finalPrice.toString()
     }
     for (const i in list) {
@@ -84,7 +84,7 @@ const checkQuantityUpdatePrice = () =>{
             }
         }
 
-        if (!errors){
+        if (!errors) {
             saveButtonDisabled = false
         }
     }
@@ -128,23 +128,34 @@ const validatePrice = () => {
     }
 }
 
-const validateForms = () => {
+const validateProductForm = () => {
+    validateForms(1)
+}
+
+const validateForms = (maxIndexToCheckHasNumber = 2) => {
     const saveBtn = document.getElementById("saveBtn")
     const form = document.getElementById("form")
+    const spanError = document.querySelector("#error")
 
     let saveButtonDisabled = false;
-    if ( form != null ) {
+    if (form != null) {
         const inputs = form.getElementsByTagName("input")
         for (let i in inputs) {
             if (i > 0) {
-                console.log(inputs[i])
-                console.log("i: " + i + " - " + inputs[i].value)
-                if (inputs[i].value.length === 0) {
+                if (inputs[i].value.length === 0 ||
+                    (i <= maxIndexToCheckHasNumber && hasNumber(inputs[i].value))) {
+                    console.log(hasNumber(inputs[i].value))
                     saveButtonDisabled = true
+                    spanError.classList.remove("d-none");
+                    spanError.classList.add("animate__headShake");
                     break
+                } else {
+                    if (spanError != null) {
+                        spanError.classList.add("d-none");
+                        spanError.classList.remove("animate__headShake");
+                    }
                 }
                 saveButtonDisabled = false
-                console.log(inputs[i].value.length)
             }
         }
     }
@@ -157,6 +168,10 @@ const validateForms = () => {
 
         }
     }
+}
+
+const hasNumber = (myString) => {
+    return /\d/.test(myString);
 }
 
 const getItemList = () => {

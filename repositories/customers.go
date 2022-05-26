@@ -61,7 +61,7 @@ func (c *customerRepository) Save(customer models.Customer) (models.Customer, er
 	}
 	
 	defer db.Close()
-	insertStat, err := db.Prepare("INSERT INTO customers (id, name, lastname, phone, address, doc) VALUES ($1, $2, $3, $4, $5, %6)")
+	insertStat, err := db.Prepare("INSERT INTO customers (id, name, lastname, phone, address, doc) VALUES ($1, $2, $3, $4, $5, $6)")
 	if err != nil {
 		log.Printf("error when preparing the query, %s", err.Error())
 		return models.Customer{}, err

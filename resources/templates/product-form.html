@@ -17,16 +17,30 @@
                 <input value="{{ .Product.ID }}" name="id" type="text" class="form-control d-none" >
 
                 <div class="form-floating mb-3">
-                    <input onfocusout="validateForms()" value="{{ .Product.Name }}" type="text" class="form-control" id="name" name="name" placeholder="Producto" required>
+                    <input onblur="validateProductForm()" value="{{ .Product.Name }}" type="text" class="form-control" id="name" name="name" placeholder="Producto" required>
                     <label class="ms-3" for="name">Producto</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input onfocusout="validateForms()" onchange="validateQuantity()" value="{{ .Product.Quantity }}" type="number" class="form-control" id="quantity" name="quantity" placeholder="Cantidad" required>
+                    <input onblur="validateProductForm()" onchange="validateQuantity()" value="{{ .Product.Quantity }}" type="number" class="form-control" id="quantity" name="quantity" placeholder="Cantidad" required>
                     <label class="ms-3" for="quantity">Cantidad</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input onfocusout="validateForms()" onchange="validatePrice()" value="{{ .Product.Price }}" type="number" class="form-control" id="price" name="price" placeholder="Precio" required>
+                    <input onblur="validateProductForm()" onchange="validatePrice()" value="{{ .Product.Price }}" type="number" class="form-control" id="price" name="price" placeholder="Precio" required>
                     <label class="ms-3" for="price">Precio</label>
+                </div>
+
+                <div id="error" class="row d-none m-auto w-100 animate__animated">
+                                    <span class="badge m-auto bg-danger">
+                                        Todos los campos
+                                        <br>
+                                        deben estar completos
+                                        <hr>
+                                         El nombre y apellido
+                                        <br>
+                                        no pueden tener números
+                                        <hr>
+                                        NO PODRAS GUARDAR EL CLIENTE
+                                    </span>
                 </div>
 
                 <div>
