@@ -113,18 +113,12 @@
                 <div>
 
                     {{ if .Order.ID }}
-                       <!-- <a class="btn btn-success m-auto search-product-button" onclick="searchProduct('{{ .Order.Customer.ID }}')" >
-                            <i class="fa-solid fa-plus fa-2x search-product-button-icon "></i>
-                        </a>-->
                         <a class="btn btn-secondary col-3 back-button" href="/orders">
                             <i class="fa-solid fa-angle-left fa-2x back-button-icon"></i>
                         </a>
                         <a class="btn btn-danger col-3 delete-order-button" href="/orders/delete-confirm?from=orders&id={{ .Order.ID }}">
                             <i class="fa-solid fa-trash fa-2x delete-button-icon"></i>
                         </a>
-                        <!--<button id="saveOrderBtn" class="btn btn-primary m-auto col-3 save-button" onclick="saveOrder('{{ .Order.Customer.ID }}')" type="button">
-                            <i class="fa-solid fa-floppy-disk fa-2x"></i>
-                        </button>-->
                     {{ else }}
                         <a class="btn btn-success m-auto search-product-button" style="bottom: 180px !important;" onclick="searchProduct('{{ .Order.Customer.ID }}')" >
                             <i class="fa-solid fa-plus fa-2x search-product-button-icon "></i>
